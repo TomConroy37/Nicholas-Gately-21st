@@ -656,16 +656,16 @@
 
     const likeEl = document.getElementById('likeNum');
     let likes = 0;
-    const target = 214;
+    const target = 67677;
     let dinged = false;
     const likeTimer = setInterval(() => {
-      likes += Math.ceil(Math.random() * 18) + 4;
+      likes += Math.ceil(Math.random() * 6000) + 1500;
       if (likes >= target){
         likes = target;
         clearInterval(likeTimer);
         if (!dinged){ playDing(); dinged = true; }
       }
-      likeEl.textContent = likes;
+      likeEl.textContent = likes.toLocaleString();
     }, 90);
 
     const comments = [
@@ -674,7 +674,7 @@
       { who: "the physio", text: "please stop skipping your stretches" },
       { who: "indo housemates", text: "we miss the guy who fixed our wifi and our squat form" },
       { who: "internship boss", text: "best intern we had, still owes me a rematch" },
-      { who: "_tomconroy", text: "let's get him to 500 🔥", self: true }
+      { who: "_tomconroy", text: "let's get him to 676,767 🔥", self: true }
     ];
     const list = document.getElementById('commentList');
     list.innerHTML = '';
@@ -693,7 +693,7 @@
   const storySlides = [
     { kicker: "🤝 LOYALTY", line: "Distance, time, how busy life gets: none of it's ever changed a thing. You show up every single time it actually matters." },
     { kicker: "❤️ KIND HEARTED", line: "You'd give someone the shirt off your back and act like it was nothing. That's just who you are, and it doesn't go unnoticed." },
-    { kicker: "😂 FUNNY", line: "You've got this quiet way of making the most ordinary moments funny. Some of my favourite memories with you are honestly about nothing at all." },
+    { kicker: "💛 SELFLESS", line: "You've got a habit of putting everyone else first without ever making a thing of it. It doesn't go unnoticed, even when you think no one's paying attention." },
     { kicker: "♾️ A LIFELONG FRIEND", line: "Whatever this next year brings, I already know exactly who'll still be there for the one after that. Grateful for you, always." }
   ];
   let storyIndex = 0;
