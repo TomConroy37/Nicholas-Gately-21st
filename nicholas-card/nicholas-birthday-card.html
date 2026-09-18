@@ -349,10 +349,10 @@
   <!-- SPLASH -->
   <div class="screen active" id="screen-splash">
     <div class="app-icon">🏋️</div>
-    <div class="app-name">NICHOLAS'S<br>SESSION LOG</div>
-    <div class="app-sub">4 sets. 1 lifter. Considerable content potential.</div>
-    <button class="btn" onclick="goTo('screen-workout')">Start Session</button>
-    <div class="app-meta">Est. whenever you first skipped leg day</div>
+    <div class="app-name">Happy 21st<br>Gates</div>
+    <div class="app-sub">Couldn't ask for a better friend.</div>
+    <button class="btn" onclick="goTo('screen-workout')">Open Present</button>
+    <div class="app-meta">Hopefully this isn't confusing for you</div>
   </div>
 
   <!-- WORKOUT -->
@@ -364,7 +364,7 @@
 
     <div class="bar-rig" id="barRig">
       <div class="total-load">
-        <div class="num" id="totalLoad">0</div>
+        <div class="num" id="totalLoad">50</div>
         <div class="unit">KG ON THE BAR</div>
       </div>
       <div class="barbell">
@@ -459,10 +459,11 @@
         <div class="post-when">Happy birthday 🎂</div>
       </div>
       <div class="post-caption">
-        Happy 21st Birthday Nic! 🎉<br><br>
-        From flying out to Indonesia for an internship like it was a day trip, to somehow turning every gym session into better content than half the influencers out there — you don't do anything halfway, and everyone around you notices.<br><br>
-        New tattoos, new stamps in the passport, same genuinely good bloke underneath it all. That part hasn't moved an inch, and it's honestly my favourite thing about you.<br><br>
-        I'm proud of everything you're out here building. Here's to another year of you casually being impressive and acting like it's normal.
+        Happy 21st, Nic. 🎉<br><br>
+        Watching you these past few years — flying off to Indonesia for an internship like it was nothing, building a whole content career out of the gym, collecting stories and stamps and ink along the way — it's genuinely impressive. But honestly, none of that is even the part I'm most grateful for.<br><br>
+        What actually matters to me is the guy underneath all of it: someone who's shown up for me without fail, who's kind in a way that isn't for show, and who can make me laugh in the middle of a rough day without even trying. You're one of the most loyal, good-hearted people I know, and I don't say that lightly.<br><br>
+        Here's to another year of you being brilliant at everything you touch, and to a lot more years of a friendship that means more to me than you probably realise.<br><br>
+        Proud of you. Grateful for you. Happy birthday, mate.
         <span class="sign">— Tom</span>
       </div>
       <div class="post-stats"><span><b>21</b> years strong</span><span><b>1</b> lifetime mate</span></div>
@@ -571,14 +572,14 @@
   })();
 
   const sets = [
-    { label: "SET 1 · GYM", stat: "Session count: too many to log.", detail: "You've turned \"just one more set\" into a personality trait. Respect." },
-    { label: "SET 2 · CONTENT", stat: "Every lift, filmed, cut and posted.", detail: "You didn't just go to the gym — you produced a whole docuseries about it." },
+    { label: "SET 1 · GYM", stat: "Session count: too many to log.", detail: "We've been friends for well over 5 years now!" },
+    { label: "SET 2 · CONTENT", stat: "Every lift, filmed, cut and posted.", detail: "I'm extremely proud of your documenting and social media journey so far. It inspires me deeply. Always waiting for @gates.documents to post." },
     { label: "SET 3 · INDONESIA", stat: "3 months. One internship. Zero hesitation.", detail: "Packed a bag and went and did an engineering internship overseas like it was nothing." },
-    { label: "SET 4 · THE REST", stat: "Passport heavier than the gym bag.", detail: "New country, new ink, and still the same switched-on, good-hearted bloke underneath it." }
+    { label: "A Multi-Layered Man", stat: "Passport heavier than the gym bag.", detail: "I am grateful that even after all your personal endeavours, projects, university and work, I can always count on you to be there when I need it. A real friend." }
   ];
   const loadIncrements = [20, 20, 20, 20];
   let setIndex = 0;
-  let totalLoad = 0;
+  let totalLoad = 50;
 
   function goTo(id){
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -690,10 +691,10 @@
 
   /* ---------- Story (Highlights) ---------- */
   const storySlides = [
-    { kicker: "🇮🇩 92 DAYS ABROAD", line: "Turned a 3-month engineering internship into a full personality arc." },
-    { kicker: "🎥 CONTENT OUTPUT: UNDEFEATED", line: "More footage from one gym session than most people post in a year." },
-    { kicker: "🖋️ THE INK COLLECTION", line: "Every tattoo's got a story. You didn't ask. He told you anyway." },
-    { kicker: "21 AND STILL GOING", line: "Same good bloke, just with better stamps in his passport. Love ya, Nic." }
+    { kicker: "🤝 LOYALTY", line: "Distance, time, how busy life gets — none of it's ever changed a thing. You show up every single time it actually matters." },
+    { kicker: "❤️ KIND HEARTED", line: "You'd give someone the shirt off your back and act like it was nothing. That's just who you are, and it doesn't go unnoticed." },
+    { kicker: "😂 FUNNY", line: "You've got a way of turning an average day into the highlight of the week. Never a dull moment with you around." },
+    { kicker: "♾️ A LIFELONG FRIEND", line: "Whatever this next year brings, I already know exactly who'll still be there for the one after that. Grateful for you, always." }
   ];
   let storyIndex = 0;
   let storyTimer = null;
