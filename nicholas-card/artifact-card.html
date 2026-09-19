@@ -361,7 +361,7 @@
   <div class="status-bar">
     <span>GAINS TRACKER</span>
     <div class="status-controls">
-      <button class="sound-toggle" id="soundToggle" onclick="toggleSound()" aria-label="Toggle sound">🔊</button>
+      <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">🔊</button>
       <span id="clock">9:41</span>
     </div>
   </div>
@@ -373,7 +373,7 @@
     <div class="app-icon">🏋️</div>
     <div class="app-name">Happy 21st<br>Gates</div>
     <div class="app-sub">Couldn't ask for a better friend.</div>
-    <button class="btn" onclick="goTo('screen-workout')">Open Present</button>
+    <button class="btn" id="startBtn">Open Present</button>
     <div class="app-meta">Hopefully this isn't confusing for you</div>
   </div>
 
@@ -409,7 +409,7 @@
     </div>
 
     <div class="workout-footer">
-      <button class="btn" id="setBtn" onclick="completeSet()">Complete Set</button>
+      <button class="btn" id="setBtn">Complete Set</button>
       <div class="hint">Rest as needed. No one's timing you.</div>
     </div>
   </div>
@@ -435,7 +435,7 @@
 
     <div class="story-row">
       <div class="story-ring-wrap">
-        <button class="story-ring" id="storyRing" onclick="openStory()" aria-label="Open highlights">
+        <button class="story-ring" id="storyRing" aria-label="Open highlights">
           <span class="story-ring-inner">📸</span>
         </button>
         <span class="story-badge" id="storyBadge">1</span>
@@ -452,7 +452,7 @@
     <div class="comment-list" id="commentList"></div>
 
     <div class="feed-footer">
-      <button class="btn blue" onclick="goTo('screen-post')">View Post</button>
+      <button class="btn blue" id="viewPostBtn">View Post</button>
     </div>
   </div>
 
@@ -466,10 +466,10 @@
       <div class="story-line" id="storyLine">Turned a 3-month internship into a full personality arc.</div>
     </div>
     <div class="story-tap-zones">
-      <div class="story-tap" onclick="storyPrev()"></div>
-      <div class="story-tap" onclick="storyNext()"></div>
+      <div class="story-tap" id="storyTapPrev"></div>
+      <div class="story-tap" id="storyTapNext"></div>
     </div>
-    <button class="story-close" onclick="closeStory()" aria-label="Close highlights">✕</button>
+    <button class="story-close" id="storyCloseBtn" aria-label="Close highlights">✕</button>
   </div>
 
   <!-- FINAL POST -->
@@ -836,6 +836,15 @@
     }
     lastTap = now;
   });
+
+  document.getElementById('soundToggle').addEventListener('click', toggleSound);
+  document.getElementById('startBtn').addEventListener('click', () => goTo('screen-workout'));
+  document.getElementById('setBtn').addEventListener('click', completeSet);
+  document.getElementById('storyRing').addEventListener('click', openStory);
+  document.getElementById('viewPostBtn').addEventListener('click', () => goTo('screen-post'));
+  document.getElementById('storyTapPrev').addEventListener('click', storyPrev);
+  document.getElementById('storyTapNext').addEventListener('click', storyNext);
+  document.getElementById('storyCloseBtn').addEventListener('click', closeStory);
 
   renderSet();
 
