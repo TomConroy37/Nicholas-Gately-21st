@@ -304,12 +304,23 @@
     padding:0; position:relative; justify-content:center; align-items:center; text-align:center;
     background:linear-gradient(160deg, #1c1330, #0d1a2b); overflow:hidden;
   }
+  .story-media{ position:absolute; inset:0; z-index:0; background:#000; }
+  .story-media img, .story-media video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .story-media-scrim{
+    position:absolute; inset:0; z-index:1; opacity:0; transition:opacity 0.2s ease;
+    background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 42%, rgba(0,0,0,0.4) 100%);
+  }
+  .story-screen.has-media .story-media-scrim{ opacity:1; }
+  .story-screen.has-media{ justify-content:flex-end; }
+  .story-screen.has-media .story-slide{ padding-bottom:34px; }
+  .story-screen.has-media .story-kicker,
+  .story-screen.has-media .story-line{ text-shadow:0 2px 12px rgba(0,0,0,0.55); }
   .story-bars{ position:absolute; top:14px; left:14px; right:14px; display:flex; gap:5px; z-index:5; }
   .story-bar{ flex:1; height:3px; background:rgba(255,255,255,0.25); border-radius:2px; overflow:hidden; }
   .story-bar i{ display:block; height:100%; width:0%; background:#fff; }
   .story-bar.done i{ width:100%; animation:none; }
   @keyframes storyFill{ to{ width:100%; } }
-  .story-slide{ padding:0 32px; display:flex; flex-direction:column; gap:14px; }
+  .story-slide{ position:relative; z-index:2; padding:0 32px; display:flex; flex-direction:column; gap:14px; }
   .story-kicker{ font-family:'Archivo Black',sans-serif; font-size:15px; letter-spacing:0.03em; color:var(--amber); opacity:0; animation:storyIn 0.4s ease 0.1s forwards; }
   .story-line{ font-size:20px; line-height:1.4; font-weight:600; opacity:0; animation:storyIn 0.4s ease 0.25s forwards; }
   @keyframes storyIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:translateY(0); } }
@@ -454,8 +465,10 @@
 
   <!-- STORY (Highlights) -->
   <div class="screen story-screen" id="screen-story">
+    <div class="story-media" id="storyMedia"></div>
+    <div class="story-media-scrim"></div>
     <div class="story-bars" id="storyBars"></div>
-    <div class="story-slide">
+    <div class="story-slide" id="storySlide">
       <div class="story-kicker" id="storyKicker">🇮🇩 92 DAYS ABROAD</div>
       <div class="story-line" id="storyLine">Turned a 3-month internship into a full personality arc.</div>
     </div>
@@ -712,11 +725,15 @@
   }
 
   /* ---------- Story (Highlights) ---------- */
+  /* To add a real photo/video behind a slide, set its "media" field, e.g.:
+     media: { type: 'image', src: 'data:image/jpeg;base64,...' }
+     media: { type: 'video', src: 'data:video/mp4;base64,...' }
+     Leave media: null to keep the plain gradient/text look. */
   const storySlides = [
-    { kicker: "🤝 LOYALTY", line: "Distance, time, how busy life gets: none of it's ever changed a thing. You show up every single time it actually matters." },
-    { kicker: "❤️ KIND HEARTED", line: "You'd give someone the shirt off your back and act like it was nothing. That's just who you are, and it doesn't go unnoticed." },
-    { kicker: "💛 SELFLESS", line: "You've got a habit of putting everyone else first without ever making a thing of it. It doesn't go unnoticed, even when you think no one's paying attention." },
-    { kicker: "♾️ A LIFELONG FRIEND", line: "Whatever this next year brings, I already know exactly who'll still be there for the one after that. Grateful for you, always." }
+    { kicker: "🤝 LOYALTY", line: "Distance, time, how busy life gets: none of it's ever changed a thing. You show up every single time it actually matters.", media: null },
+    { kicker: "❤️ KIND HEARTED", line: "You'd give someone the shirt off your back and act like it was nothing. That's just who you are, and it doesn't go unnoticed.", media: null },
+    { kicker: "💛 SELFLESS", line: "You've got a habit of putting everyone else first without ever making a thing of it. It doesn't go unnoticed, even when you think no one's paying attention.", media: null },
+    { kicker: "♾️ A LIFELONG FRIEND", line: "Whatever this next year brings, I already know exactly who'll still be there for the one after that. Grateful for you, always.", media: null }
   ];
   let storyIndex = 0;
   let storyTimer = null;
@@ -738,6 +755,25 @@
 
   function renderStorySlide(){
     const s = storySlides[storyIndex];
+    const screen = document.getElementById('screen-story');
+    const mediaEl = document.getElementById('storyMedia');
+    const oldVideo = mediaEl.querySelector('video');
+    if (oldVideo) oldVideo.pause();
+
+    if (s.media){
+      screen.classList.add('has-media');
+      if (s.media.type === 'video'){
+        mediaEl.innerHTML = `<video src="${s.media.src}" autoplay muted loop playsinline></video>`;
+        const v = mediaEl.querySelector('video');
+        v.play().catch(() => {});
+      } else {
+        mediaEl.innerHTML = `<img src="${s.media.src}" alt="">`;
+      }
+    } else {
+      screen.classList.remove('has-media');
+      mediaEl.innerHTML = '';
+    }
+
     const kicker = document.getElementById('storyKicker');
     const line = document.getElementById('storyLine');
     kicker.textContent = s.kicker;
@@ -778,6 +814,8 @@
 
   function closeStory(){
     clearTimeout(storyTimer);
+    const v = document.querySelector('#storyMedia video');
+    if (v) v.pause();
     goTo('screen-feed');
   }
 
